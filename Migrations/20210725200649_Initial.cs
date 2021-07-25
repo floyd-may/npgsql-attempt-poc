@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace pgsql_poc.Migrations
@@ -59,9 +59,9 @@ namespace pgsql_poc.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RootId = table.Column<int>(nullable: false),
                     LeafId = table.Column<int>(nullable: false),
-                    Effective = table.Column<DateTime>(nullable: false)
+                    Effective = table.Column<LocalDate>(nullable: false),
+                    RootId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,9 +86,9 @@ namespace pgsql_poc.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IntermediateId = table.Column<int>(nullable: false),
                     LeafId = table.Column<int>(nullable: false),
-                    Effective = table.Column<DateTime>(nullable: false)
+                    Effective = table.Column<LocalDate>(nullable: false),
+                    IntermediateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

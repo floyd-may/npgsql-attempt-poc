@@ -19,7 +19,12 @@ namespace pgsql_poc
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=Password123;Database=npgsqlpoc");
+            optionsBuilder.UseNpgsql(
+                "Host=localhost;Username=postgres;Password=Password123;Database=npgsqlpoc",
+                npgsqlBuilder =>
+                {
+                    npgsqlBuilder.UseNodaTime();
+                });
         }
     }
 }

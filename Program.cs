@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NodaTime;
 
 namespace pgsql_poc
 {
@@ -29,7 +30,7 @@ namespace pgsql_poc
                     .Where(x => x.Id == id)
                     .Where(x => x.RecordType == IntermediateRecordType.FarType)
                     .SelectMany(x => x.Root.LeafLinks),
-                DateTime.Now);
+                new LocalDate(2021, 5, 4));
         }
 
         private static IQueryable<Leaf> IntermediateQuery(PocContext context, int id)
@@ -39,10 +40,10 @@ namespace pgsql_poc
                     .Where(x => x.Id == id)
                     .Where(x => x.RecordType == IntermediateRecordType.NearType)
                     .SelectMany(x => x.LeafLinks),
-                DateTime.Now);
+                new LocalDate(2021, 5, 4));
         }
 
-        private static IQueryable<Leaf> WrapQuery<T>(IQueryable<T> query, DateTime asOf)
+        private static IQueryable<Leaf> WrapQuery<T>(IQueryable<T> query, LocalDate asOf)
             where T : LeafLink
         {
             return query

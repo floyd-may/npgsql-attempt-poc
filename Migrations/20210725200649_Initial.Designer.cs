@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using pgsql_poc;
 
 namespace pgsql_poc.Migrations
 {
     [DbContext(typeof(PocContext))]
-    [Migration("20210725195540_Initial")]
+    [Migration("20210725200649_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,8 +50,8 @@ namespace pgsql_poc.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Effective")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<LocalDate>("Effective")
+                        .HasColumnType("date");
 
                     b.Property<int>("IntermediateId")
                         .HasColumnType("integer");
@@ -101,8 +102,8 @@ namespace pgsql_poc.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Effective")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<LocalDate>("Effective")
+                        .HasColumnType("date");
 
                     b.Property<int>("LeafId")
                         .HasColumnType("integer");

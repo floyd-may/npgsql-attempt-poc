@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using pgsql_poc;
 
@@ -47,8 +48,8 @@ namespace pgsql_poc.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Effective")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<LocalDate>("Effective")
+                        .HasColumnType("date");
 
                     b.Property<int>("IntermediateId")
                         .HasColumnType("integer");
@@ -99,8 +100,8 @@ namespace pgsql_poc.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Effective")
-                        .HasColumnType("timestamp without time zone");
+                    b.Property<LocalDate>("Effective")
+                        .HasColumnType("date");
 
                     b.Property<int>("LeafId")
                         .HasColumnType("integer");
