@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Immutable;
+using Microsoft.EntityFrameworkCore;
 
 namespace pgsql_poc
 {
@@ -9,8 +10,16 @@ namespace pgsql_poc
             base.OnModelCreating(builder);
 
             builder.Entity<Root>();
-            builder.Entity<Intermediate>();
+            builder.Entity<Intermediate>(b =>
+            {
+                b.Property(x => x.RecordType).HasConversion<string>();
+            });
             builder.Entity<Leaf>();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=Password123;Database=npgsqlpoc");
         }
     }
 }
